@@ -7,6 +7,11 @@
 }
 
 :root {
+  --color-background: oklch(0.997 0 0);
+  --color-foreground: oklch(0.173 0 0);
+  --color-accent: oklch(0.4971 0.1554 256.2);
+  --color-border: oklch(0.8452 0 0);
+
   --font-sans: "Google Sans", sans-serif;
 }
 
@@ -17,5 +22,7 @@
 }
 
 body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
   font-family: var(--font-sans);
 }
