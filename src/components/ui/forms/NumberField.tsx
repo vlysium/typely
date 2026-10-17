@@ -1,5 +1,3 @@
-import { useId } from "react";
-
 import clsx from "clsx";
 
 import styles from "./NumberField.module.css";
@@ -12,15 +10,12 @@ interface NumberFieldProps {
 }
 
 const NumberField = ({ defaultValue, step = 1, label, suffix }: NumberFieldProps) => {
-	const id = useId();
-
 	return (
 		<div className={clsx(styles["input-group"])}>
-			<label className={clsx(styles["label"])} htmlFor={id}>
+			<label className={clsx(styles["label"])}>
 				{label}
 			</label>
 			<input
-				id={id}
 				className={clsx(styles["input"])}
 				type="number"
 				defaultValue={defaultValue}

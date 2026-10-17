@@ -6,23 +6,39 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Google Sans Code";
+  src: url("/fonts/google-sans-code-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --color-background: oklch(0.997 0 0);
+  --color-background-subtle: oklch(0.95 0 0);
   --color-foreground: oklch(0.173 0 0);
   --color-accent: oklch(0.4971 0.1554 256.2);
   --color-border: oklch(0.8452 0 0);
 
   --font-sans: "Google Sans", sans-serif;
+  --font-mono: "Google Sans Code", monospace;
 }
 
-* {
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  outline: none;
 }
 
 body {
+  position: relative;
   background-color: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+}
+
+.root {
+  isolation: isolate;
 }
