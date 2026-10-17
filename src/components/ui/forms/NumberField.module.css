@@ -32,10 +32,17 @@
 	font-family: var(--font-mono);
 	font-size: 1rem;
 	color: var(--color-foreground);
+	-moz-appearance: textfield;
+  appearance: textfield;
 	transition: border-color 0.15s, color 0.15s;
 
 	&:is(:hover, :focus) {
 		border-color: var(--color-accent);
+	}
+
+	&::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
 	}
 }
 
