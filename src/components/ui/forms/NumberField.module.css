@@ -15,7 +15,7 @@
 	font-weight: 500;
 	transform: translate(0.5px, 0.375rem);
 	pointer-events: none;
-	transition: transform 0.3s, font-size 0.3s, color 0.3s;
+	transition: transform 0.15s, font-size 0.15s, color 0.15s;
 }
 
 .input-group:has(.input:hover, .input:focus) .label {
@@ -32,7 +32,7 @@
 	font-family: var(--font-mono);
 	font-size: 1rem;
 	color: var(--color-foreground);
-	transition: border-color 0.3s, color 0.3s;
+	transition: border-color 0.15s, color 0.15s;
 
 	&:is(:hover, :focus) {
 		border-color: var(--color-accent);

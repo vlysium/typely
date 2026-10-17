@@ -1,6 +1,7 @@
 import clsx from "clsx";
 
 import styles from "./Sidebar.module.css";
+import { Details } from "@/components/ui/details";
 import { NumberField, SelectField } from "@/components/ui/forms";
 
 const scaleOptions: Array<{ label: string; value: string }> = [
@@ -22,8 +23,10 @@ const Sidebar = () => {
 	return (
 		<aside className={clsx(styles["sidebar"])}>
 			<form className={clsx(styles["form"])} onSubmit={handleSubmit}>
-				<NumberField label="Base size" defaultValue={16} step={0.5} suffix="px" />
-				<SelectField htmlLabel="Scale" options={scaleOptions} defaultValue={scaleOptions[2].value} />
+				<Details summary="Base settings" defaultOpen={true}>
+					<NumberField label="Base size" defaultValue={16} step={0.5} suffix="px" />
+					<SelectField htmlLabel="Scale" options={scaleOptions} defaultValue={scaleOptions[2].value} />
+				</Details>
 			</form>
 		</aside>
 	);

@@ -15,7 +15,7 @@
 	font-weight: 500;
   transform: translate(0.5px, -1rem);
 	pointer-events: none;
-	transition: color 0.3s;
+	transition: color 0.15s;
 }
 
 .field:has(.select:hover, .select:focus-visible, .select[data-pressed]) .label {
@@ -42,7 +42,7 @@
 	font-family: var(--font-mono);
 	font-size: 1rem;
 	color: var(--color-foreground);
-	transition: border-color 0.3s, color 0.3s;
+	transition: border-color 0.15s, color 0.15s;
 
 	&:is(:hover, :focus-visible, [data-pressed]) {
 		border-color: var(--color-accent);

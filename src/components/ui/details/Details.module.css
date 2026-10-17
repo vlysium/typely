@@ -1,0 +1,58 @@
+.collapsible {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.icon {
+	aspect-ratio: 1 / 1;
+	width: 1.25rem;
+	height: 1.25rem;
+  transition: transform 0.1s ease-out;
+}
+
+.trigger {
+  background-color: var(--color-background);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-foreground);
+  white-space: nowrap;
+  -webkit-user-select: none;
+  user-select: none;
+	transition: color 0.15s;
+
+	&:is(:hover, :focus-visible) {
+		color: var(--color-accent);
+	}
+
+  &[data-panel-open] .icon {
+    transform: rotate(90deg);
+  }
+}
+
+.panel {
+  overflow: hidden;
+  display: flex;
+  height: var(--collapsible-panel-height);
+  flex-direction: column;
+  justify-content: end;
+  transition: height 0.15s ease-out;
+
+  &[data-starting-style], &[data-ending-style] {
+    height: 0;
+  }
+}
+
+.content {
+	display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+	margin-top: 0.5rem;
+}
