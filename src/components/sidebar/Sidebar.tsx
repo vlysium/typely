@@ -5,18 +5,14 @@ import { BaseScale, BaseSize } from "./base";
 import { FontFamily, FontWeight, LetterSpacing, LineHeight } from "./body";
 import styles from "./Sidebar.module.css";
 import { Details } from "@/components/ui/details";
+import useSettingsStore from "@/lib/stores/settings.store";
 
 const Sidebar = () => {
-
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-
-		console.log();
-	};
+	const { settings } = useSettingsStore();
 
 	return (
 		<aside className={clsx(styles["sidebar"])}>
-			<form className={clsx(styles["form"])} onSubmit={handleSubmit}>
+			<form className={clsx(styles["form"])} onSubmit={(e) => e.preventDefault()}>
 				<Details summary="Base settings" defaultOpen={true}>
 					<BaseSize />
 					<BaseScale />

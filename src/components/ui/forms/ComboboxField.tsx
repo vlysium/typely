@@ -9,23 +9,23 @@ import styles from "./ComboboxField.module.css";
 
 interface VirtualizedItem {
   value: string;
-	label: string;
 }
 
 type Virtualizer = ReturnType<typeof useVirtualizer<HTMLDivElement, Element>>;
 
 interface ComboboxFieldProps {
+  value: string;
+  setValue: (value: string) => void;
 	label: string;
 	items: Array<VirtualizedItem>;
-	defaultValue?: string;
 }
 
-const ComboboxField = ({ label, items, defaultValue }: ComboboxFieldProps) => {
+const ComboboxField = ({ value, setValue, label, items }: ComboboxFieldProps) => {
 	const virtualizerRef = useRef<Virtualizer | null>(null);
 
   return (
 		<div className={clsx(styles["field"])}>
-			<Combobox.Root virtualized items={items} defaultValue={defaultValue} onItemHighlighted={(item, { reason, index }) => {
+			<Combobox.Root virtualized items={items} value={value} onValueChange={(newValue) => setValue(newValue!)} onItemHighlighted={(item, { reason, index }) => {
 				const virtualizer = virtualizerRef.current;
 
 				if (!item || !virtualizer) {
@@ -124,7 +124,7 @@ const VirtualizedList = ({ virtualizerRef }: { virtualizerRef: React.RefObject<V
               <Combobox.ItemIndicator className={clsx(styles["item-indicator"])}>
                 <CheckIcon className={clsx(styles["check-icon"])} />
               </Combobox.ItemIndicator>
-              <span className={clsx(styles["item-text"])}>{item.label}</span>
+              <span className={clsx(styles["item-text"])}>{item.value}</span>
             </Combobox.Item>
           );
         })}

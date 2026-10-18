@@ -1,6 +1,8 @@
 import { SelectField } from "@/components/ui/forms";
+import useSettingsStore from "@/lib/stores/settings.store";
+import type { Weight } from "@/server/fonts";
 
-const weightOptions: Array<{ label: string; value: string }> = [
+const weightOptions: Array<{ label: string; value: Weight }> = [
 	{ label: "100 — Thin", value: "100" },
 	{ label: "200 — Extra Light", value: "200" },
 	{ label: "300 — Light", value: "300" },
@@ -13,8 +15,10 @@ const weightOptions: Array<{ label: string; value: string }> = [
 ];
 
 const FontWeight = () => {
+	const { settings, setBodyFontWeight } = useSettingsStore();
+
 	return (
-		<SelectField label="Font weight" options={weightOptions} defaultValue={weightOptions[3].value} />
+		<SelectField label="Font weight" options={weightOptions} value={settings.body.fontWeight} setValue={setBodyFontWeight} />
 	);
 };
 

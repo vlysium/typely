@@ -1,4 +1,5 @@
 import { SelectField } from "@/components/ui/forms";
+import useSettingsStore from "@/lib/stores/settings.store";
 
 export type ScaleOption = {
 	label: string;
@@ -17,8 +18,15 @@ const scaleOptions: Array<ScaleOption> = [
 ];
 
 const BaseScale = () => {
+	const { settings, setBaseScale } = useSettingsStore();
+
 	return (
-		<SelectField label="Scale" options={scaleOptions} defaultValue={scaleOptions[2].value} />
+		<SelectField
+			value={settings.base.scale}
+			setValue={setBaseScale}
+			label="Scale"
+			options={scaleOptions}
+		/>
 	);
 };
 

@@ -5,15 +5,16 @@ import { Check, ListChevronsUpDown } from "lucide-react";
 import styles from "./SelectField.module.css";
 
 interface SelectFieldProps<T extends string | number> {
+	value: T;
 	label: string;
 	options: Array<{ label: string; value: T }>;
-	defaultValue: T;
+  setValue: (value: T) => void;
 }
 
-const SelectField = <T extends string | number>({ label, options, defaultValue }: SelectFieldProps<T>) => {
+const SelectField = <T extends string | number>({ value, setValue, label, options }: SelectFieldProps<T>) => {
 	return (
     <div className={clsx(styles["field"])}>
-      <Select.Root items={options} defaultValue={defaultValue}>
+      <Select.Root items={options} value={value} onValueChange={(newValue) => setValue(newValue!)}>
         <Select.Label className={clsx(styles["label"])}>{label}</Select.Label>
         <Select.Trigger className={clsx(styles["select"])}>
           <Select.Value className={clsx(styles["value"])} placeholder="&ensp;" />
