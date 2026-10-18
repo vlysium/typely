@@ -4,13 +4,13 @@ import { Check, ListChevronsUpDown } from "lucide-react";
 
 import styles from "./SelectField.module.css";
 
-interface SelectFieldProps {
+interface SelectFieldProps<T extends string | number> {
 	label: string;
-	options: Array<{ label: string; value: string }>;
-	defaultValue: string;
+	options: Array<{ label: string; value: T }>;
+	defaultValue: T;
 }
 
-const SelectField = ({ label, options, defaultValue }: SelectFieldProps) => {
+const SelectField = <T extends string | number>({ label, options, defaultValue }: SelectFieldProps<T>) => {
 	return (
     <div className={clsx(styles["field"])}>
       <Select.Root items={options} defaultValue={defaultValue}>

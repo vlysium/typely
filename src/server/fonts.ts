@@ -1,18 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
 
-interface Font {
+type Item = {
   family: string;
   variants: Array<string>;
 }
 
-interface Fonts {
-	value: string;
-	label: string;
-}
-
-interface Weights {
-  [key: string]: Array<string>;
-}
+export type Weight = "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
 
 export const loadFonts = createServerFn({ method: "GET" })
 	.handler(async () => {
@@ -25,15 +18,12 @@ export const loadFonts = createServerFn({ method: "GET" })
 
 		const data = await response.json();
 
-		const fonts: Array<Fonts> = await data.items.map((font: Font) => ({
-			value: font.family,
-			label: font.family
-		}));
+		const fonts: Array<string> = await data.items.map((font: Item) => (font.family));
 
-		const weights: Weights = await data.items.reduce((acc: Weights, font: Font) => {
+		const weights: Record<string, Array<Weight>> = await data.items.reduce((acc: Record<string, Array<Weight>>, font: Item) => {
 			acc[font.family] = font.variants
 				.filter(variant => !variant.includes("italic")) // Remove italic variants
-				.map(variant => variant === "regular" ? "400" : variant); // Cast the "regular" variant to "400"
+				.map(variant => (variant === "regular" ? "400" : variant) as Weight); // Cast the "regular" variant to "400"
 			return acc;
 		}, {});
 

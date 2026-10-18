@@ -8,7 +8,11 @@ const FontFamily = () => {
 	const data = indexRoute.useLoaderData();
 
 	return (
-		<ComboboxField label="Font family" items={data.fonts} defaultValue="Inter" />
+		<ComboboxField
+			label="Font family"
+			items={data.fonts.map((font) => ({ label: font, value: font }))}
+			defaultValue="Inter"
+		/>
 	);
 };
 

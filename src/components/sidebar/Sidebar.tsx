@@ -2,7 +2,7 @@ import { Separator } from "@base-ui/react";
 import clsx from "clsx";
 
 import { BaseScale, BaseSize } from "./base";
-import { FontFamily, FontWeight, LetterSpacing, LineHeight } from "./body-text";
+import { FontFamily, FontWeight, LetterSpacing, LineHeight } from "./body";
 import styles from "./Sidebar.module.css";
 import { Details } from "@/components/ui/details";
 
@@ -22,7 +22,7 @@ const Sidebar = () => {
 					<BaseScale />
 				</Details>
 				<Separator orientation="horizontal" className={clsx(styles["separator"])} />
-				<Details summary="Body text" defaultOpen={true}>
+				<Details summary="Body" defaultOpen={true}>
 					<FontFamily />
 					<FontWeight />
 					<LineHeight />

@@ -97,8 +97,7 @@ const VirtualizedList = ({ virtualizerRef }: { virtualizerRef: React.RefObject<V
   }
 
   return (
-    <div role="presentation" ref={handleScrollElementRef} className={clsx(styles["scroller"])} style={{ "--total-size": `${totalSize}px` } as React.CSSProperties }
-    >
+    <div role="presentation" ref={handleScrollElementRef} className={clsx(styles["scroller"])} style={{ "--total-size": `${totalSize}px` } as React.CSSProperties }>
       <div role="presentation" className={clsx(styles["virtualized-placeholder"])} style={{ height: totalSize }}>
         {virtualizer.getVirtualItems().map((virtualItem) => {
           const item = filteredItems[virtualItem.index];
@@ -109,7 +108,7 @@ const VirtualizedList = ({ virtualizerRef }: { virtualizerRef: React.RefObject<V
               index={virtualItem.index}
               data-index={virtualItem.index}
               ref={virtualizer.measureElement}
-              value={item}
+              value={item.value}
               className={clsx(styles["item"])}
               aria-setsize={filteredItems.length}
               aria-posinset={virtualItem.index + 1}
