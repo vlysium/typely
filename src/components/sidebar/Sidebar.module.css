@@ -16,3 +16,9 @@
 	height: 1px;
 	margin-inline: -0.5rem;
 }
+
+.two-cols {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.5rem;
+}

@@ -3,13 +3,11 @@ import clsx from "clsx";
 
 import { BaseScale, BaseSize } from "./base";
 import { FontFamily, FontWeight, LetterSpacing, LineHeight } from "./body";
+import { FluidScale, FluidSize, MaxWidth, MinWidth } from "./fluid";
 import styles from "./Sidebar.module.css";
 import { Details } from "@/components/ui/details";
-import useSettingsStore from "@/lib/stores/settings.store";
 
 const Sidebar = () => {
-	const { settings } = useSettingsStore();
-
 	return (
 		<aside className={clsx(styles["sidebar"])}>
 			<form className={clsx(styles["form"])} onSubmit={(e) => e.preventDefault()}>
@@ -18,12 +16,24 @@ const Sidebar = () => {
 					<BaseScale />
 				</Details>
 				<Separator orientation="horizontal" className={clsx(styles["separator"])} />
+				<Details summary="Fluid" defaultOpen={false}>
+					<FluidSize />
+					<FluidScale />
+					<div className={clsx(styles["two-cols"])}>
+						<MinWidth />
+						<MaxWidth />
+					</div>
+				</Details>
+				<Separator orientation="horizontal" className={clsx(styles["separator"])} />
 				<Details summary="Body" defaultOpen={true}>
 					<FontFamily />
 					<FontWeight />
-					<LineHeight />
-					<LetterSpacing />
+					<div className={clsx(styles["two-cols"])}>
+						<LineHeight />
+						<LetterSpacing />
+					</div>
 				</Details>
+				<Separator orientation="horizontal" className={clsx(styles["separator"])} />
 			</form>
 		</aside>
 	);
