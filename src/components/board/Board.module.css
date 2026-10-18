@@ -1,5 +1,5 @@
 .board {
-	padding-top: 0.125rem;
+	padding-top: 0.25rem;
 	border: 1px solid var(--color-border);
 	border-radius: 0.5rem;
 }
@@ -14,6 +14,7 @@
 .list {
   position: relative;
   z-index: 1;
+  overflow: hidden;
   display: flex;
   gap: 0.25rem;
   margin-bottom: -1px;
@@ -62,11 +63,38 @@
   border-top: 1px solid var(--color-border);
   border-inline: 1px solid var(--color-border);
 	border-radius: 0.5rem 0.5rem 0 0;
-	margin: 0 -1px;
+  margin: 0 -1px;
   translate: var(--active-tab-left);
   transition-property: translate, width;
   transition-duration: 150ms;
   transition-timing-function: ease-in-out;
+
+  @supports (corner-shape: scoop) {
+    &::before, &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      background-color: var(--color-background);
+      height: 0.75rem;
+      width: 0.75rem;
+      border-top: 1px solid var(--color-border);
+      corner-shape: scoop;
+    }
+
+    &::before {
+      left: -0.75rem;
+      border-radius: 100% 0 0 0;
+      border-left: 1px solid var(--color-border);
+      box-shadow: 1px 1px 0 1px var(--color-background);
+    }
+  
+    &::after {
+      right: -0.75rem;
+      border-radius: 0 100% 0 0;
+      border-right: 1px solid var(--color-border);
+      box-shadow: -1px 1px 0 1px var(--color-background);
+    }
+  }
 }
 
 .content {
