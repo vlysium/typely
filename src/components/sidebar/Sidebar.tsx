@@ -1,8 +1,9 @@
+import { getRouteApi } from "@tanstack/react-router";
 import clsx from "clsx";
 
 import styles from "./Sidebar.module.css";
 import { Details } from "@/components/ui/details";
-import { NumberField, SelectField } from "@/components/ui/forms";
+import { ComboboxField, NumberField, SelectField } from "@/components/ui/forms";
 
 const scaleOptions: Array<{ label: string; value: string }> = [
 	{ label: "1.067 — Minor Second", value: "1.067" },
@@ -15,7 +16,11 @@ const scaleOptions: Array<{ label: string; value: string }> = [
 	{ label: "1.618 — Golden Ratio", value: "1.618" }
 ];
 
+const indexRoute = getRouteApi("/");
+
 const Sidebar = () => {
+	const data = indexRoute.useLoaderData();
+
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 	};
@@ -26,6 +31,9 @@ const Sidebar = () => {
 				<Details summary="Base settings" defaultOpen={true}>
 					<NumberField label="Base size" defaultValue={16} step={0.5} suffix="px" />
 					<SelectField htmlLabel="Scale" options={scaleOptions} defaultValue={scaleOptions[2].value} />
+				</Details>
+				<Details summary="Typography" defaultOpen={true}>
+					<ComboboxField label="Font" items={data.fonts} defaultValue="Inter" />
 				</Details>
 			</form>
 		</aside>
