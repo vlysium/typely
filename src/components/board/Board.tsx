@@ -2,12 +2,13 @@ import { Tabs } from "@base-ui/react";
 import clsx from "clsx";
 
 import styles from "./Board.module.css";
+import { ScalePreview } from "./tabs";
 
 const tabs = [
 	{
-		value: "tab-1",
-		label: "Tab 1",
-		render: <div>Tab 1 content</div>,
+		value: "scale-preview",
+		label: "Scale Preview",
+		render: <ScalePreview />,
 	},
 	{
 		value: "tab-2",

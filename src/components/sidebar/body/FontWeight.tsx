@@ -2,6 +2,7 @@ import { getRouteApi } from "@tanstack/react-router";
 
 import { SelectField } from "@/components/ui/forms";
 import useSettingsStore from "@/lib/stores/settings.store";
+import { getFontWeights } from "@/lib/utils";
 import type { Weight } from "@/server/fonts";
 
 const fontWeightOptions: Array<{ value: Weight; label: string }> = [
@@ -23,8 +24,9 @@ const FontWeight = () => {
 
   const { settings, setBodyFontWeight } = useSettingsStore();
 
-  const availableWeights = data.weights[settings.body.fontFamily] ?? [];
-  const filteredOptions = fontWeightOptions.filter(({ value }) => availableWeights.includes(value));
+  const availableWeights = getFontWeights(settings.body.fontFamily, data.weights);
+
+  const filteredOptions = fontWeightOptions.filter(({value}) => availableWeights.includes(value));
 
   return (
     <SelectField

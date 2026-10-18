@@ -1,0 +1,32 @@
+.scale-preview {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.scale-item {
+	transition: background-color 0.15s ease;
+
+	@media (max-width: 767px) {
+		&:nth-child(odd) {
+			background-color: color-mix(in oklch, var(--color-background-subtle), var(--color-background) 50%);
+		}
+	}
+
+	@media (min-width: 768px) {
+		&:hover {
+			background-color: color-mix(in oklch, var(--color-background-subtle), var(--color-background) 50%);
+		}
+	}
+}
+
+.scale-name, .scale-value, .scale-preview-text {
+	padding: 0.5rem;
+}
+
+.scale-name, .scale-value {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	text-align: right;
+	color: color-mix(in oklch, var(--color-foreground) 75%, var(--color-background));
+	white-space: nowrap;
+}
