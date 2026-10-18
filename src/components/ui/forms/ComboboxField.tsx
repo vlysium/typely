@@ -3,7 +3,7 @@ import { useCallback, useImperativeHandle, useRef } from "react";
 import { Combobox } from "@base-ui/react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import clsx from "clsx";
-import { CheckIcon, ListChevronsUpDown } from "lucide-react";
+import { CheckIcon } from "lucide-react";
 
 import styles from "./ComboboxField.module.css";
 
