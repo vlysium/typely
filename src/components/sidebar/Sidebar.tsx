@@ -1,3 +1,4 @@
+import { Separator } from "@base-ui/react";
 import { getRouteApi } from "@tanstack/react-router";
 import clsx from "clsx";
 
@@ -16,6 +17,18 @@ const scaleOptions: Array<{ label: string; value: string }> = [
 	{ label: "1.618 — Golden Ratio", value: "1.618" }
 ];
 
+const weightOptions: Array<{ label: string; value: string }> = [
+	{ label: "100 — Thin", value: "100" },
+	{ label: "200 — Extra Light", value: "200" },
+	{ label: "300 — Light", value: "300" },
+	{ label: "400 — Regular", value: "400" },
+	{ label: "500 — Medium", value: "500" },
+	{ label: "600 — Semi Bold", value: "600" },
+	{ label: "700 — Bold", value: "700" },
+	{ label: "800 — Extra Bold", value: "800" },
+	{ label: "900 — Black", value: "900" }
+];
+
 const indexRoute = getRouteApi("/");
 
 const Sidebar = () => {
@@ -29,11 +42,15 @@ const Sidebar = () => {
 		<aside className={clsx(styles["sidebar"])}>
 			<form className={clsx(styles["form"])} onSubmit={handleSubmit}>
 				<Details summary="Base settings" defaultOpen={true}>
-					<NumberField label="Base size" defaultValue={16} step={0.5} suffix="px" />
-					<SelectField htmlLabel="Scale" options={scaleOptions} defaultValue={scaleOptions[2].value} />
+					<NumberField label="Base size" defaultValue={16} step={0.5} min={0} suffix="px" />
+					<SelectField label="Scale" options={scaleOptions} defaultValue={scaleOptions[2].value} />
 				</Details>
-				<Details summary="Typography" defaultOpen={true}>
+				<Separator orientation="horizontal" className={clsx(styles["separator"])} />
+				<Details summary="Body text" defaultOpen={true}>
 					<ComboboxField label="Font" items={data.fonts} defaultValue="Inter" />
+					<SelectField label="Font weight" options={weightOptions} defaultValue={weightOptions[3].value} />
+					<NumberField label="Line height" defaultValue={1.5} step={0.05} min={0} />
+					<NumberField label="Letter spacing" defaultValue={0} step={0.002} suffix="em" />
 				</Details>
 			</form>
 		</aside>

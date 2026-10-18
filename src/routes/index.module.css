@@ -1,6 +1,7 @@
 .app-container {
 	display: grid;
 	grid-template-columns: 20rem 1fr;
+	min-height: 100svh;
 	gap: 0.25rem;
 	padding: 0.25rem;
 }
