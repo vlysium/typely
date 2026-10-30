@@ -15,6 +15,12 @@
 	background-color: var(--color-border);
 	height: 1px;
 	margin-inline: -0.5rem;
+
+	@media (max-width: 767px) {
+		&:last-child {
+			display: none;
+		}
+	}
 }
 
 .two-cols {
