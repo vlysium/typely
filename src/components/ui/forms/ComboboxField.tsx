@@ -16,55 +16,69 @@ type Virtualizer = ReturnType<typeof useVirtualizer<HTMLDivElement, Element>>;
 interface ComboboxFieldProps {
   value: string;
   setValue: (value: string) => void;
-	label: string;
+  label: string;
 	items: Array<VirtualizedItem>;
 }
 
 const ComboboxField = ({ value, setValue, label, items }: ComboboxFieldProps) => {
-	const virtualizerRef = useRef<Virtualizer | null>(null);
+  const virtualizerRef = useRef<Virtualizer | null>(null);
+
+  const virtualizedItems: Array<VirtualizedItem> = items.map((item) => ({
+    value: item.value,
+  }));
 
   return (
-		<div className={clsx(styles["field"])}>
-			<Combobox.Root virtualized items={items} value={value} onValueChange={(newValue) => setValue(newValue!)} onItemHighlighted={(item, { reason, index }) => {
-				const virtualizer = virtualizerRef.current;
+    <div className={clsx(styles["field"])}>
+      <Combobox.Root
+        virtualized
+        items={virtualizedItems}
+        value={virtualizedItems.find((item) => item.value === value) ?? null}
+        onValueChange={(item) => setValue(item?.value ?? "")}
+        itemToStringLabel={(item) => item.value}
+        onItemHighlighted={(item, { reason, index }) => {
+          const virtualizer = virtualizerRef.current;
 
-				if (!item || !virtualizer) {
-					return;
-				}
+          if (!item || !virtualizer) {
+            return;
+          }
 
-				const isStart = index === 0;
-				const isEnd = index === virtualizer.options.count - 1;
-				const shouldScroll = reason === "none" || (reason === "keyboard" && (isStart || isEnd));
+          const isStart = index === 0;
+          const isEnd = index === virtualizer.options.count - 1;
+          const shouldScroll = reason === "none" || (reason === "keyboard" && (isStart || isEnd));
 
-				if (shouldScroll) {
-					queueMicrotask(() => {
-						virtualizer.scrollToIndex(index, { align: isEnd ? "start" : "end" });
-					});
-				}
-			}}>
-				<label className={clsx(styles["label"])}>
-					{label}
-				</label>
-				<Combobox.Input className={clsx(styles["input"])} />
+          if (shouldScroll) {
+            queueMicrotask(() => {
+              virtualizer.scrollToIndex(index, { align: isEnd ? "start" : "end" });
+            });
+          }
+        }}>
+        <label className={clsx(styles["label"])}>
+          {label}
+        </label>
+        <Combobox.Input className={clsx(styles["input"])} />
 
-				<Combobox.Portal>
-					<Combobox.Positioner className={clsx(styles["positioner"])} sideOffset={4}>
-						<Combobox.Popup className={clsx(styles["popup"])}>
-							<Combobox.Empty>
-								<div className={clsx(styles["empty"])}>No items found.</div>
-							</Combobox.Empty>
-							<Combobox.List className={clsx(styles["list"])}>
-								<VirtualizedList virtualizerRef={virtualizerRef} />
-							</Combobox.List>
-						</Combobox.Popup>
-					</Combobox.Positioner>
-				</Combobox.Portal>
-			</Combobox.Root>
-		</div>
+        <Combobox.Portal>
+          <Combobox.Positioner className={clsx(styles["positioner"])} sideOffset={4}>
+            <Combobox.Popup className={clsx(styles["popup"])}>
+              <Combobox.Empty>
+                <div className={clsx(styles["empty"])}>No items found.</div>
+              </Combobox.Empty>
+              <Combobox.List className={clsx(styles["list"])}>
+                <VirtualizedList virtualizerRef={virtualizerRef} />
+              </Combobox.List>
+            </Combobox.Popup>
+          </Combobox.Positioner>
+        </Combobox.Portal>
+      </Combobox.Root>
+    </div>
   );
 };
 
-const VirtualizedList = ({ virtualizerRef }: { virtualizerRef: React.RefObject<Virtualizer | null> }) => {
+interface VirtualizedListProps {
+  virtualizerRef: React.RefObject<Virtualizer | null>;
+}
+
+const VirtualizedList = ({ virtualizerRef }: VirtualizedListProps) => {
   const filteredItems = Combobox.useFilteredItems<VirtualizedItem>();
 
   const scrollElementRef = useRef<HTMLDivElement | null>(null);
@@ -108,7 +122,7 @@ const VirtualizedList = ({ virtualizerRef }: { virtualizerRef: React.RefObject<V
               index={virtualItem.index}
               data-index={virtualItem.index}
               ref={virtualizer.measureElement}
-              value={item.value}
+              value={item}
               className={clsx(styles["item"])}
               aria-setsize={filteredItems.length}
               aria-posinset={virtualItem.index + 1}
