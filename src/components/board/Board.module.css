@@ -106,6 +106,7 @@
 	height: 100%;
   width: 100%;
   border-top: 1px solid var(--color-border);
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .panel {
@@ -145,4 +146,11 @@
       }
     }
   }
+}
+
+.panel-content {
+  overflow-x: auto;
+  height: 100%;
+	white-space: nowrap;
+  place-content: center;
 }

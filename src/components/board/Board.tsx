@@ -37,7 +37,9 @@ const Board = () => {
 				<main className={clsx(styles["content"])}>
 					{tabs.map((tab) => (
 						<Tabs.Panel key={tab.value} className={clsx(styles["panel"])} value={tab.value} role="tabpanel">
-							{tab.render}
+							<div className={clsx(styles["panel-content"])}>
+								{tab.render}
+							</div>
 						</Tabs.Panel>
 					))}
 				</main>

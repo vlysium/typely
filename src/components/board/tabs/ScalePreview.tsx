@@ -25,7 +25,7 @@ const ScalePreview = () => {
 
 	return (
 		<table className={clsx(styles["scale-preview"])}>
-			<tbody>
+			<tbody className={clsx(styles["scale-preview-body"])}>
 				{scaleItems.map((item) => (
 					<tr key={item.name} className={clsx(styles["scale-item"])}>
 						<td className={clsx(styles["scale-name"])}>{item.name}</td>
