@@ -1,23 +1,13 @@
-import { getRouteApi } from "@tanstack/react-router";
-
 import { useGoogleFonts } from "@/lib/hooks/useGoogleFonts";
 import useSettingsStore from "@/lib/stores/settings.store";
 import { calculateFontSize } from "@/lib/utils";
 
-const indexRoute = getRouteApi("/");
-
 const PreviewStyle = () => {
-	const data = indexRoute.useLoaderData();
 
 	const { settings } = useSettingsStore();
 	const { base, body } = settings;
 
-	useGoogleFonts({
-		fonts: [
-			{ font: body.fontFamily },
-		],
-		weights: data.weights,
-	});
+	useGoogleFonts({ fonts: [{ font: body.fontFamily }], weights: { [body.fontFamily]: [body.fontWeight] } });
 
 	return (
 		<style>
