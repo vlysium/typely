@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { BaseScale, BaseSize } from "./base";
 import { FontFamily, FontWeight, LetterSpacing, LineHeight } from "./body";
 import { FluidScale, FluidSize, MaxWidth, MinWidth } from "./fluid";
+import { PreviewText } from "./preview";
 import styles from "./Sidebar.module.css";
 import { Details } from "@/components/ui/details";
 
@@ -11,6 +12,9 @@ const Sidebar = () => {
 	return (
 		<aside className={clsx(styles["sidebar"])}>
 			<form className={clsx(styles["form"])} onSubmit={(e) => e.preventDefault()}>
+				<Details summary="Preview" defaultOpen={true}>
+					<PreviewText />
+				</Details>
 				<Details summary="Base settings" defaultOpen={true}>
 					<BaseSize />
 					<BaseScale />

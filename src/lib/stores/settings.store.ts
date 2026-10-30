@@ -3,7 +3,13 @@ import { create } from "zustand";
 import type { ScaleOption } from "@/components/sidebar/base";
 import type { Weight } from "@/server/fonts";
 
+export type Unit = "px" | "rem";
+
 type Settings = {
+	preview: {
+		unit: Unit;
+		text: string;
+	};
 	base: {
 		size: number;
 		scale: ScaleOption["value"];
@@ -25,6 +31,8 @@ type Settings = {
 interface SettingsState {
 	settings: Settings;
 
+	setUnit: (unit: Unit) => void;
+	setPreviewText: (text: string) => void;
 	setBaseSize: (size: number) => void;
 	setBaseScale: (scale: ScaleOption["value"]) => void;
 	setBodyFontFamily: (fontFamily: string) => void;
@@ -39,6 +47,10 @@ interface SettingsState {
 
 const useSettingsStore = create<SettingsState>((set) => ({
 	settings: {
+		preview: {
+			unit: "px",
+			text: "The quick brown fox jumps over the lazy dog."
+		},
 		base: {
 			size: 16,
 			scale: 1.2
@@ -56,6 +68,14 @@ const useSettingsStore = create<SettingsState>((set) => ({
 			maxWidth: 1280
 		}
 	},
+
+	setUnit: (unit) => set((state) => ({
+		settings: { ...state.settings, preview: { ...state.settings.preview, unit } }
+	})),
+
+	setPreviewText: (text) => set((state) => ({
+		settings: { ...state.settings, preview: { ...state.settings.preview, text: text } }
+	})),
 
 	setBaseSize: (size) => set((state) => ({
 		settings: { ...state.settings, base: { ...state.settings.base, size } }

@@ -17,11 +17,9 @@ const scaleItems = [
 	{ value: -2, name: "xs" },
 ];
 
-const previewText = "The quick brown fox jumps over the lazy dog.";
-
 const ScalePreview = () => {
 	const { settings } = useSettingsStore();
-	const { base } = settings;
+	const { preview, base } = settings;
 
 	return (
 		<table className={clsx(styles["scale-preview"])}>
@@ -29,8 +27,8 @@ const ScalePreview = () => {
 				{scaleItems.map((item) => (
 					<tr key={item.name} className={clsx(styles["scale-item"])}>
 						<td className={clsx(styles["scale-name"])}>{item.name}</td>
-						<td className={clsx(styles["scale-value"])}>{`${calculateFontSize(base.size, base.scale, item.value, "px")}px`}</td>
-						<td className={clsx(styles["scale-preview-text"])}><span className={clsx(`preview-${item.name}`, "preview-body")}>{previewText}</span></td>
+						<td className={clsx(styles["scale-value"])}>{calculateFontSize(base.size, base.scale, item.value, preview.unit)}{preview.unit}</td>
+						<td className={clsx(styles["scale-preview-text"])}><span className={clsx(`preview-${item.name}`, "preview-body")}>{preview.text}</span></td>
 					</tr>
 				))}
 			</tbody>
