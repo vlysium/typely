@@ -2,6 +2,10 @@
 	padding-top: 0.25rem;
 	border: 1px solid var(--color-border);
 	border-radius: 0.5rem;
+
+  @media (min-width: 768px) {
+    overflow-y: hidden;
+  }
 }
 
 .root {
@@ -99,7 +103,7 @@
 
 .content {
   position: relative;
-  overflow: hidden;
+  overflow: auto;
   background-color: var(--color-background);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -107,13 +111,17 @@
   width: 100%;
   border-top: 1px solid var(--color-border);
   border-radius: 0 0 0.5rem 0.5rem;
+
+  &:has([data-starting-style], [data-ending-style]) {
+    overflow: hidden;
+  }
 }
 
 .panel {
   grid-area: 1 / 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: safe center;
+  justify-content: safe center;
   color: var(--color-foreground);
   transition: opacity 0.15s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -146,11 +154,4 @@
       }
     }
   }
-}
-
-.panel-content {
-  overflow-x: auto;
-  height: 100%;
-	white-space: nowrap;
-  place-content: center;
 }

@@ -16,6 +16,7 @@ const Sidebar = () => {
 					<PreviewText />
 					<Unit />
 				</Details>
+				<Separator orientation="horizontal" className={clsx(styles["separator"])} />
 				<Details summary="Base settings" defaultOpen={true}>
 					<BaseSize />
 					<BaseScale />
