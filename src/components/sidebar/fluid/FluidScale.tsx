@@ -18,15 +18,21 @@ const scaleOptions: Array<ScaleOption> = [
 	{ label: "1.618 — Golden Ratio", value: 1.618 }
 ];
 
-const FluidScale = () => {
+interface FluidScaleProps {
+	className?: string;
+}
+
+const FluidScale = ({ className }: FluidScaleProps) => {
 	const { settings, setFluidScale } = useSettingsStore();
 
 	return (
 		<SelectField
+			className={className}
 			value={settings.fluid.scale}
 			setValue={setFluidScale}
 			label="Scale"
 			options={scaleOptions}
+			disabled={!settings.fluid.isEnabled}
 		/>
 	);
 };

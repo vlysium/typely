@@ -14,35 +14,37 @@ export type Settings = {
 		size: number;
 		scale: ScaleOption["value"];
 	};
+	fluid: {
+		isEnabled: boolean;
+		size: number;
+		scale: ScaleOption["value"] | "_inherit";
+		minWidth: number;
+		maxWidth: number;
+	};
 	body: {
 		fontFamily: string;
 		fontWeight: Weight;
 		lineHeight: number;
 		letterSpacing: number;
 	};
-	fluid: {
-		size: number;
-		scale: ScaleOption["value"] | "_inherit";
-		minWidth: number;
-		maxWidth: number;
-	};
 }
 
 interface SettingsState {
 	settings: Settings;
 
-	setUnit: (unit: Unit) => void;
+	setPreviewUnit: (unit: Unit) => void;
 	setPreviewText: (text: string) => void;
 	setBaseSize: (size: number) => void;
 	setBaseScale: (scale: ScaleOption["value"]) => void;
-	setBodyFontFamily: (fontFamily: string) => void;
-	setBodyFontWeight: (weight: Weight) => void;
-	setBodyLineHeight: (lineHeight: number) => void;
-	setBodyLetterSpacing: (letterSpacing: number) => void;
+	setFluidIsEnabled: (isEnabled: boolean) => void;
 	setFluidSize: (size: number) => void;
 	setFluidScale: (scale: ScaleOption["value"] | "_inherit") => void;
 	setFluidMinWidth: (minWidth: number) => void;
 	setFluidMaxWidth: (maxWidth: number) => void;
+	setBodyFontFamily: (fontFamily: string) => void;
+	setBodyFontWeight: (weight: Weight) => void;
+	setBodyLineHeight: (lineHeight: number) => void;
+	setBodyLetterSpacing: (letterSpacing: number) => void;
 }
 
 const useSettingsStore = create<SettingsState>((set) => ({
@@ -53,23 +55,24 @@ const useSettingsStore = create<SettingsState>((set) => ({
 		},
 		base: {
 			size: 16,
-			scale: 1.2
+			scale: 1.2,
+		},
+		fluid: {
+			isEnabled: false,
+			size: 16,
+			scale: "_inherit",
+			minWidth: 320,
+			maxWidth: 1280
 		},
 		body: {
 			fontFamily: "Inter",
 			fontWeight: "400",
 			lineHeight: 1.5,
 			letterSpacing: 0
-		},
-		fluid: {
-			size: 16,
-			scale: "_inherit",
-			minWidth: 320,
-			maxWidth: 1280
 		}
 	},
 
-	setUnit: (unit) => set((state) => ({
+	setPreviewUnit: (unit) => set((state) => ({
 		settings: { ...state.settings, preview: { ...state.settings.preview, unit } }
 	})),
 
@@ -83,6 +86,26 @@ const useSettingsStore = create<SettingsState>((set) => ({
 
 	setBaseScale: (scale) => set((state) => ({
 		settings: { ...state.settings, base: { ...state.settings.base, scale } }
+	})),
+
+	setFluidIsEnabled: (isEnabled) => set((state) => ({
+		settings: { ...state.settings, fluid: { ...state.settings.fluid, isEnabled } }
+	})),
+
+	setFluidSize: (size) => set((state) => ({
+		settings: { ...state.settings, fluid: { ...state.settings.fluid, size } }
+	})),
+
+	setFluidScale: (scale) => set((state) => ({
+		settings: { ...state.settings, fluid: { ...state.settings.fluid, scale } }
+	})),
+
+	setFluidMinWidth: (minWidth) => set((state) => ({
+		settings: { ...state.settings, fluid: { ...state.settings.fluid, minWidth } }
+	})),
+
+	setFluidMaxWidth: (maxWidth) => set((state) => ({
+		settings: { ...state.settings, fluid: { ...state.settings.fluid, maxWidth } }
 	})),
 
 	setBodyFontFamily: (fontFamily) => set((state) => ({
@@ -100,22 +123,6 @@ const useSettingsStore = create<SettingsState>((set) => ({
 	setBodyLetterSpacing: (letterSpacing) => set((state) => ({
 		settings: { ...state.settings, body: { ...state.settings.body, letterSpacing: letterSpacing } }
 	})),
-
-	setFluidSize: (size) => set((state) => ({
-		settings: { ...state.settings, fluid: { ...state.settings.fluid, size: size } }
-	})),
-
-	setFluidScale: (scale) => set((state) => ({
-		settings: { ...state.settings, fluid: { ...state.settings.fluid, scale: scale } }
-	})),
-
-	setFluidMinWidth: (minWidth) => set((state) => ({
-		settings: { ...state.settings, fluid: { ...state.settings.fluid, minWidth: minWidth } }
-	})),
-
-	setFluidMaxWidth: (maxWidth) => set((state) => ({
-		settings: { ...state.settings, fluid: { ...state.settings.fluid, maxWidth: maxWidth } }
-	}))
 }));
 
 export default useSettingsStore;

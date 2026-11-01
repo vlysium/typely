@@ -6,15 +6,20 @@ const units = [
 	{ value: "rem", label: "rem" }
 ] satisfies Array<{ value: "px" | "rem"; label: string; }>;
 
-const Unit = () => {
-	const { settings, setUnit } = useSettingsStore();
+interface UnitProps {
+	className?: string;
+}
+
+const Unit = ({ className }: UnitProps) => {
+	const { settings, setPreviewUnit } = useSettingsStore();
 
 	return (
 		<RadioGroupField
 			value={settings.preview.unit}
 			label="Unit"
 			options={units}
-			setValue={setUnit}
+			setValue={setPreviewUnit}
+			className={className}
 		/>
 	);
 };

@@ -17,7 +17,11 @@ const scaleOptions: Array<ScaleOption> = [
 	{ label: "1.618 — Golden Ratio", value: 1.618 }
 ];
 
-const BaseScale = () => {
+interface BaseScaleProps {
+	className?: string;
+}
+
+const BaseScale = ({ className }: BaseScaleProps) => {
 	const { settings, setBaseScale } = useSettingsStore();
 
 	return (
@@ -26,6 +30,7 @@ const BaseScale = () => {
 			setValue={setBaseScale}
 			label="Scale"
 			options={scaleOptions}
+			className={className}
 		/>
 	);
 };

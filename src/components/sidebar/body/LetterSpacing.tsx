@@ -1,7 +1,11 @@
 import { NumberField } from "@/components/ui/forms";
 import useSettingsStore from "@/lib/stores/settings.store";
 
-const LetterSpacing = () => {
+interface LetterSpacingProps {
+	className?: string;
+}
+
+const LetterSpacing = ({ className }: LetterSpacingProps) => {
 	const { settings, setBodyLetterSpacing } = useSettingsStore();
 
 	return (
@@ -11,6 +15,7 @@ const LetterSpacing = () => {
 			label="Letter spacing"
 			step={0.002}
 			suffix="em"
+			className={className}
 		/>
 	);
 };

@@ -1,7 +1,11 @@
 import { NumberField } from "@/components/ui/forms";
 import useSettingsStore from "@/lib/stores/settings.store";
 
-const LineHeight = () => {
+interface LineHeightProps {
+	className?: string;
+}
+
+const LineHeight = ({ className }: LineHeightProps) => {
 	const { settings, setBodyLineHeight } = useSettingsStore();
 
 	return (
@@ -11,6 +15,7 @@ const LineHeight = () => {
 			label="Line height"
 			step={0.05}
 			min={0}
+			className={className}
 		/>
 	);
 };

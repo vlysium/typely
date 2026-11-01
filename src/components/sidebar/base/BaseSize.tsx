@@ -1,7 +1,11 @@
 import { NumberField } from "@/components/ui/forms";
 import useSettingsStore from "@/lib/stores/settings.store";
 
-const BaseSize = () => {
+interface BaseSizeProps {
+	className?: string;
+}
+
+const BaseSize = ({ className }: BaseSizeProps) => {
 	const { settings, setBaseSize } = useSettingsStore();
 
 	return (
@@ -12,6 +16,7 @@ const BaseSize = () => {
 			step={0.5}
 			min={0}
 			suffix="px"
+			className={className}
 		/>
 	);
 };

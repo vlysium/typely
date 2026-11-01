@@ -3,14 +3,15 @@ import clsx from "clsx";
 import styles from "./TextAreaField.module.css";
 
 interface TextAreaFieldProps {
+	className?: string;
 	value: string;
 	label: string;
 	setValue: (value: string) => void;
 }
 
-const TextAreaField = ({ value, setValue, label }: TextAreaFieldProps) => {
+const TextAreaField = ({ className, value, setValue, label }: TextAreaFieldProps) => {
 	return (
-		<div className={clsx(styles["input-group"])}>
+		<div className={clsx(styles["input-group"], className)}>
 			<label className={clsx(styles["label"])}>
 				{label}
 			</label>

@@ -14,13 +14,14 @@ interface VirtualizedItem {
 type Virtualizer = ReturnType<typeof useVirtualizer<HTMLDivElement, Element>>;
 
 interface ComboboxFieldProps {
+  className?: string;
   value: string;
   setValue: (value: string) => void;
   label: string;
 	items: Array<VirtualizedItem>;
 }
 
-const ComboboxField = ({ value, setValue, label, items }: ComboboxFieldProps) => {
+const ComboboxField = ({ className, value, setValue, label, items }: ComboboxFieldProps) => {
   const virtualizerRef = useRef<Virtualizer | null>(null);
 
   const virtualizedItems: Array<VirtualizedItem> = items.map((item) => ({
@@ -28,7 +29,7 @@ const ComboboxField = ({ value, setValue, label, items }: ComboboxFieldProps) =>
   }));
 
   return (
-    <div className={clsx(styles["field"])}>
+    <div className={clsx(styles["field"], className)}>
       <Combobox.Root
         virtualized
         items={virtualizedItems}

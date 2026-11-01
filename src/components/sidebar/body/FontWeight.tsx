@@ -17,9 +17,13 @@ const fontWeightOptions: Array<{ value: Weight; label: string }> = [
   { value: "900", label: "900 — Black" },
 ];
 
+interface FontWeightProps {
+  className?: string;
+}
+
 const indexRoute = getRouteApi("/");
 
-const FontWeight = () => {
+const FontWeight = ({ className }: FontWeightProps) => {
   const data = indexRoute.useLoaderData();
 
   const { settings, setBodyFontWeight } = useSettingsStore();
@@ -34,6 +38,7 @@ const FontWeight = () => {
       options={filteredOptions}
       value={availableWeights.includes(settings.body.fontWeight) ? settings.body.fontWeight : "400"}
       setValue={setBodyFontWeight}
+      className={className}
     />
   );
 };

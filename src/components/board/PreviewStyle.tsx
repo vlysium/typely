@@ -3,11 +3,17 @@ import useSettingsStore from "@/lib/stores/settings.store";
 import { calculateFluidFontSize, calculateFontSize } from "@/lib/utils";
 
 const PreviewStyle = () => {
-
 	const { settings } = useSettingsStore();
 	const { base, body, fluid } = settings;
 
 	useGoogleFonts({ fonts: [{ font: body.fontFamily }], weights: { [body.fontFamily]: [body.fontWeight] } });
+
+	function getPreviewSize(step: number) {
+		if (fluid.isEnabled) {
+			return calculateFluidFontSize(base, fluid, step, "px");
+		}
+		return `${calculateFontSize(base.size, base.scale, step, "px")}px`;
+	}
 
 	return (
 		<style>
@@ -21,16 +27,16 @@ const PreviewStyle = () => {
 						--preview-body-line-height: ${body.lineHeight};
 						--preview-body-letter-spacing: ${body.letterSpacing}em;
 
-						--preview-xs: ${calculateFluidFontSize(base, fluid, -2, "px")};
-            --preview-sm: ${calculateFluidFontSize(base, fluid, -1, "px")};
-            --preview-base: ${calculateFluidFontSize(base, fluid, 0, "px")};
-            --preview-lg: ${calculateFluidFontSize(base, fluid, 1, "px")};
-            --preview-xl: ${calculateFluidFontSize(base, fluid, 2, "px")};
-            --preview-2xl: ${calculateFluidFontSize(base, fluid, 3, "px")};
-            --preview-3xl: ${calculateFluidFontSize(base, fluid, 4, "px")};
-            --preview-4xl: ${calculateFluidFontSize(base, fluid, 5, "px")};
-            --preview-5xl: ${calculateFluidFontSize(base, fluid, 6, "px")};
-            --preview-6xl: ${calculateFluidFontSize(base, fluid, 7, "px")};
+						--preview-xs: ${getPreviewSize(-2)};
+            --preview-sm: ${getPreviewSize(-1)};
+            --preview-base: ${getPreviewSize(0)};
+            --preview-lg: ${getPreviewSize(1)};
+            --preview-xl: ${getPreviewSize(2)};
+            --preview-2xl: ${getPreviewSize(3)};
+            --preview-3xl: ${getPreviewSize(4)};
+            --preview-4xl: ${getPreviewSize(5)};
+            --preview-5xl: ${getPreviewSize(6)};
+            --preview-6xl: ${getPreviewSize(7)};
 					}
 
 					.preview-body {

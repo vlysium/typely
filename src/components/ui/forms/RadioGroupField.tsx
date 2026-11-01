@@ -7,16 +7,17 @@ import clsx from "clsx";
 import styles from "./RadioGroupField.module.css";
 
 interface RadioGroupFieldProps<T extends string> {
+  className?: string;
   value: T;
   label: string;
   options: Array<{ value: T; label: string; }>
   setValue: (value: T) => void;
 }
 
-const RadioGroupField = <T extends string>({ label, options, value, setValue }: RadioGroupFieldProps<T>) => {
+const RadioGroupField = <T extends string>({ className, label, options, value, setValue }: RadioGroupFieldProps<T>) => {
   const id = useId();
   return (
-    <RadioGroup aria-labelledby={id} value={value} onValueChange={(newValue) => setValue(newValue)} className={clsx(styles["radio-group"])}>
+    <RadioGroup aria-labelledby={id} value={value} onValueChange={(newValue) => setValue(newValue)} className={clsx(styles["radio-group"], className)}>
       <div className={clsx(styles["caption"])} id={id}>
         {label}
       </div>

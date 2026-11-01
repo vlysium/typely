@@ -1,7 +1,11 @@
 import { TextAreaField } from "@/components/ui/forms";
 import useSettingsStore from "@/lib/stores/settings.store";
 
-const PreviewText = () => {
+interface PreviewTextProps {
+	className?: string;
+}
+
+const PreviewText = ({ className }: PreviewTextProps) => {
 	const { settings, setPreviewText } = useSettingsStore();
 
 	return (
@@ -9,6 +13,7 @@ const PreviewText = () => {
 			label="Preview Text"
 			value={settings.preview.text}
 			setValue={setPreviewText}
+			className={className}
 		/>
 	);
 };
