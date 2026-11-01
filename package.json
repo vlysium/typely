@@ -10,7 +10,7 @@
     "generate-routes": "tsr generate",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint",
+    "lint": "eslint & tsc --noEmit",
     "format": "prettier --write . && eslint --fix",
     "check": "prettier --check ."
   },
