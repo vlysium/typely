@@ -1,11 +1,11 @@
 import { useGoogleFonts } from "@/lib/hooks/useGoogleFonts";
 import useSettingsStore from "@/lib/stores/settings.store";
-import { calculateFontSize } from "@/lib/utils";
+import { calculateFluidFontSize, calculateFontSize } from "@/lib/utils";
 
 const PreviewStyle = () => {
 
 	const { settings } = useSettingsStore();
-	const { base, body } = settings;
+	const { base, body, fluid } = settings;
 
 	useGoogleFonts({ fonts: [{ font: body.fontFamily }], weights: { [body.fontFamily]: [body.fontWeight] } });
 
@@ -21,16 +21,16 @@ const PreviewStyle = () => {
 						--preview-body-line-height: ${body.lineHeight};
 						--preview-body-letter-spacing: ${body.letterSpacing}em;
 
-						--preview-xs: ${calculateFontSize(base.size, base.scale, -2, "px")}px;
-            --preview-sm: ${calculateFontSize(base.size, base.scale, -1, "px")}px;
-            --preview-base: ${calculateFontSize(base.size, base.scale, 0, "px")}px;
-            --preview-lg: ${calculateFontSize(base.size, base.scale, 1, "px")}px;
-            --preview-xl: ${calculateFontSize(base.size, base.scale, 2, "px")}px;
-            --preview-2xl: ${calculateFontSize(base.size, base.scale, 3, "px")}px;
-            --preview-3xl: ${calculateFontSize(base.size, base.scale, 4, "px")}px;
-            --preview-4xl: ${calculateFontSize(base.size, base.scale, 5, "px")}px;
-            --preview-5xl: ${calculateFontSize(base.size, base.scale, 6, "px")}px;
-            --preview-6xl: ${calculateFontSize(base.size, base.scale, 7, "px")}px;
+						--preview-xs: ${calculateFluidFontSize(base, fluid, -2, "px")};
+            --preview-sm: ${calculateFluidFontSize(base, fluid, -1, "px")};
+            --preview-base: ${calculateFluidFontSize(base, fluid, 0, "px")};
+            --preview-lg: ${calculateFluidFontSize(base, fluid, 1, "px")};
+            --preview-xl: ${calculateFluidFontSize(base, fluid, 2, "px")};
+            --preview-2xl: ${calculateFluidFontSize(base, fluid, 3, "px")};
+            --preview-3xl: ${calculateFluidFontSize(base, fluid, 4, "px")};
+            --preview-4xl: ${calculateFluidFontSize(base, fluid, 5, "px")};
+            --preview-5xl: ${calculateFluidFontSize(base, fluid, 6, "px")};
+            --preview-6xl: ${calculateFluidFontSize(base, fluid, 7, "px")};
 					}
 
 					.preview-body {
@@ -81,7 +81,7 @@ const PreviewStyle = () => {
 					.preview-6xl {
 						font-size: var(--preview-6xl);
 					}
-				`
+				`.replaceAll(/\s+/g, " ") // Remove extra whitespace
 			}
 		</style>
 	);

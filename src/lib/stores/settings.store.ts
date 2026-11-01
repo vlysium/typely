@@ -5,7 +5,7 @@ import type { Weight } from "@/server/fonts";
 
 export type Unit = "px" | "rem";
 
-type Settings = {
+export type Settings = {
 	preview: {
 		unit: Unit;
 		text: string;

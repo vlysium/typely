@@ -1,3 +1,4 @@
+import type { Settings } from "./stores/settings.store";
 import type { Weight } from "@/server/fonts";
 
 export function getFontWeights(fontFamily: string, weights: Record<string, Array<Weight>>): Array<Weight> {
@@ -13,7 +14,28 @@ export function calculateFontSize(base: number, scale: number, step: number, uni
   }
 
   // Round to 2 decimal places
-  fontSize = Number((Math.round(fontSize * 1000) / 1000).toFixed(2));
+  return Number(fontSize.toFixed(2));
+}
 
-  return fontSize;
+export function calculateFluidFontSize(base: Settings["base"], fluid: Settings["fluid"], step: number, unit: "px" | "rem"): string {
+  const isSameScale = fluid.scale === "_inherit" || fluid.scale === base.scale;
+  const isSameSize = fluid.size === base.size;
+
+  // Handle division by 0
+  if (fluid.maxWidth === fluid.minWidth) {
+    return `${calculateFontSize(base.size, base.scale, step, unit)}${unit}`;
+  }
+
+  // No fluid settings applied
+  if (isSameScale && isSameSize) {
+    return `${calculateFontSize(base.size, base.scale, step, unit)}${unit}`;
+  }
+
+  const minFontSize = calculateFontSize(base.size, base.scale, step, unit);
+  const maxFontSize = calculateFontSize(fluid.size, fluid.scale === "_inherit" ? base.scale : fluid.scale, step, unit);
+
+  const slope = (maxFontSize - minFontSize) / (fluid.maxWidth - fluid.minWidth);
+   const yAxisIntersection = minFontSize - fluid.minWidth * slope;
+
+  return `clamp(${minFontSize}${unit}, ${yAxisIntersection.toFixed(2)}${unit} + ${(slope * 100).toFixed(2)}vw, ${maxFontSize}${unit})`;
 }
