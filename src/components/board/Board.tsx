@@ -2,7 +2,7 @@ import { Tabs } from "@base-ui/react";
 import clsx from "clsx";
 
 import styles from "./Board.module.css";
-import { ScalePreview } from "./tabs";
+import { ScalePreview } from "./tabs/scale-preview";
 
 const tabs = [
 	{

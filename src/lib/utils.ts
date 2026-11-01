@@ -17,25 +17,18 @@ export function calculateFontSize(base: number, scale: number, step: number, uni
   return Number(fontSize.toFixed(2));
 }
 
-export function calculateFluidFontSize(base: Settings["base"], fluid: Settings["fluid"], step: number, unit: "px" | "rem"): string {
-  const isSameScale = fluid.scale === base.scale;
-  const isSameSize = fluid.size === base.size;
+export function calculateFluidFontSize(base: Settings["base"], fluid: Settings["fluid"], step: number, fontUnit: "px" | "rem", containerUnit: "vw" | "cqi"): string {
 
   // Handle division by 0
   if (fluid.maxWidth === fluid.minWidth) {
-    return `${calculateFontSize(base.size, base.scale, step, unit)}${unit}`;
+    return `${calculateFontSize(base.size, base.scale, step, fontUnit)}${fontUnit}`;
   }
 
-  // No fluid settings applied
-  if (isSameScale && isSameSize) {
-    return `${calculateFontSize(base.size, base.scale, step, unit)}${unit}`;
-  }
-
-  const minFontSize = calculateFontSize(base.size, base.scale, step, unit);
-  const maxFontSize = calculateFontSize(fluid.size, fluid.scale, step, unit);
+  const minFontSize = calculateFontSize(base.size, base.scale, step, fontUnit);
+  const maxFontSize = calculateFontSize(fluid.size, fluid.scale, step, fontUnit);
 
   const slope = (maxFontSize - minFontSize) / (fluid.maxWidth - fluid.minWidth);
    const yAxisIntersection = minFontSize - fluid.minWidth * slope;
 
-  return `clamp(${minFontSize}${unit}, ${yAxisIntersection.toFixed(2)}${unit} + ${(slope * 100).toFixed(2)}vw, ${maxFontSize}${unit})`;
+  return `clamp(${minFontSize}${fontUnit}, ${yAxisIntersection.toFixed(2)}${fontUnit} + ${(slope * 100).toFixed(2)}${containerUnit}, ${maxFontSize}${fontUnit})`;
 }

@@ -10,7 +10,7 @@ const PreviewStyle = () => {
 
 	function getPreviewSize(step: number) {
 		if (fluid.isEnabled) {
-			return calculateFluidFontSize(base, fluid, step, "px");
+			return calculateFluidFontSize(base, fluid, step, "px", "cqi");
 		}
 		return `${calculateFontSize(base.size, base.scale, step, "px")}px`;
 	}
