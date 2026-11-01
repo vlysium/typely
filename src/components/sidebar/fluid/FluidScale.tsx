@@ -3,11 +3,10 @@ import useSettingsStore from "@/lib/stores/settings.store";
 
 export type ScaleOption = {
 	label: string;
-	value: 1.067 | 1.125 | 1.200 | 1.250 | 1.333 | 1.414 | 1.500 | 1.618 | "_inherit";
+	value: 1.067 | 1.125 | 1.200 | 1.250 | 1.333 | 1.414 | 1.500 | 1.618;
 };
 
 const scaleOptions: Array<ScaleOption> = [
-	{ label: "inherit", value: "_inherit" },
 	{ label: "1.067 — Minor Second", value: 1.067 },
 	{ label: "1.125 — Major Second", value: 1.125 },
 	{ label: "1.200 — Minor Third", value: 1.200 },

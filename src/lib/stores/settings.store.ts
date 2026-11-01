@@ -17,7 +17,7 @@ export type Settings = {
 	fluid: {
 		isEnabled: boolean;
 		size: number;
-		scale: ScaleOption["value"] | "_inherit";
+		scale: ScaleOption["value"];
 		minWidth: number;
 		maxWidth: number;
 	};
@@ -38,7 +38,7 @@ interface SettingsState {
 	setBaseScale: (scale: ScaleOption["value"]) => void;
 	setFluidIsEnabled: (isEnabled: boolean) => void;
 	setFluidSize: (size: number) => void;
-	setFluidScale: (scale: ScaleOption["value"] | "_inherit") => void;
+	setFluidScale: (scale: ScaleOption["value"]) => void;
 	setFluidMinWidth: (minWidth: number) => void;
 	setFluidMaxWidth: (maxWidth: number) => void;
 	setBodyFontFamily: (fontFamily: string) => void;
@@ -60,7 +60,7 @@ const useSettingsStore = create<SettingsState>((set) => ({
 		fluid: {
 			isEnabled: false,
 			size: 16,
-			scale: "_inherit",
+			scale: 1.2,
 			minWidth: 320,
 			maxWidth: 1280
 		},

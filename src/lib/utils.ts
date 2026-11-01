@@ -18,7 +18,7 @@ export function calculateFontSize(base: number, scale: number, step: number, uni
 }
 
 export function calculateFluidFontSize(base: Settings["base"], fluid: Settings["fluid"], step: number, unit: "px" | "rem"): string {
-  const isSameScale = fluid.scale === "_inherit" || fluid.scale === base.scale;
+  const isSameScale = fluid.scale === base.scale;
   const isSameSize = fluid.size === base.size;
 
   // Handle division by 0
@@ -32,7 +32,7 @@ export function calculateFluidFontSize(base: Settings["base"], fluid: Settings["
   }
 
   const minFontSize = calculateFontSize(base.size, base.scale, step, unit);
-  const maxFontSize = calculateFontSize(fluid.size, fluid.scale === "_inherit" ? base.scale : fluid.scale, step, unit);
+  const maxFontSize = calculateFontSize(fluid.size, fluid.scale, step, unit);
 
   const slope = (maxFontSize - minFontSize) / (fluid.maxWidth - fluid.minWidth);
    const yAxisIntersection = minFontSize - fluid.minWidth * slope;
