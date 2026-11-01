@@ -6,6 +6,7 @@
   line-height: 1.25rem;
   font-weight: 500;
   color: var(--color-foreground);
+  cursor: pointer;
   transition: color 0.15s;
 
   &:hover {

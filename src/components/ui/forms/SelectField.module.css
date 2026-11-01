@@ -7,7 +7,6 @@
   position: absolute;
 	display: inline-block;
 	inset: 0.5rem;
-	background-color: var(--color-background);
 	width: max-content;
 	height: 1.25em;
 	padding: 0 0.25rem;
@@ -16,10 +15,29 @@
   transform: translate(1px, -1rem);
 	pointer-events: none;
 	transition: color 0.15s;
+
+  &::before {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		top: calc(0.5em + 1px);
+		left: 0;
+		background-color: var(--color-background);
+		height: 1px;
+		width: 100%;
+	}
 }
 
 .field:has(.select:hover, .select:focus-visible, .select[data-pressed]) .label {
 	color: var(--color-accent);
+}
+
+.field:has(.select:disabled) .label {
+	color: var(--color-foreground-disabled);
+
+	&::before {
+		background-color: var(--color-background-disabled);
+	}
 }
 
 .icon, .chevrons-icon {
@@ -42,11 +60,19 @@
 	font-family: var(--font-mono);
 	font-size: 1rem;
 	color: var(--color-foreground);
+  cursor: pointer;
 	transition: border-color 0.15s, color 0.15s;
 
 	&:is(:hover, :focus-visible, [data-pressed]) {
 		border-color: var(--color-accent);
 	}
+
+	&[data-disabled] {
+		background-color: var(--color-background-disabled);
+		border-color: var(--color-border);
+    color: var(--color-foreground-disabled);
+		cursor: default;
+  }
 }
 
 .positioner {

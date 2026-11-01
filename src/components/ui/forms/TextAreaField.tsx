@@ -16,7 +16,7 @@ const TextAreaField = ({ className, value, setValue, label }: TextAreaFieldProps
 				{label}
 			</label>
 			<textarea
-				className={clsx(styles["input"])}
+				className={clsx(styles["text-area"])}
 				value={value}
 				onChange={(e) => setValue(e.target.value.replace(/[\r\n]+/g, ""))}
 				placeholder=" "
